@@ -1825,7 +1825,57 @@ void ControlSDL::init(std::string title)
             else
             {
                 menu("Play Again");
-                resetGame();
+                                // resetGame();
+                bullet_level = 0;
+                kill = 0;
+                count_num_exp = 0;
+                scrolling = -(BACKGROUND_HEIGHT - SCREEN_HEIGHT);
+                time_end_game = 0;
+                spaceship->setPlayer(player_sub);
+                player_sub->setBulletType(BLASTER);
+                player_sub->setStatus(true);
+                player_sub->setHeart(3);
+                spaceship->setPlayer(player_sub);
+                spaceship->setRect(SCREEN_WIDTH / 2, SCREEN_HEIGHT - HEIGHT_MAIN);
+
+                newBoss->setHeart(BOSS_HEART);
+                boss->setBoss(newBoss);
+                boss->setRect(-WIDTH_BOSS, -HEIGHT_BOSS);
+                for (int i = 0; i < boss->getBulletList().size(); i++)
+                {
+                    BulletSDL *p_bullet = boss->getBulletList().at(i);
+                    if (p_bullet)
+                    {
+                        p_bullet->setRect(boss->getRect().x + WIDTH_BOSS / 2, boss->getRect().y + HEIGHT_BOSS);
+                    }
+                }
+                int t = 0;
+                int y_row = -DISTANCE_BETWEEN_CHICKENS;
+                for (int c = 0; c < NUMBER_OF_CHICKEN; c++)
+                {
+                    ChickenSDL *p_chicken = p_chicken_list.at(c);
+                    Chicken *chicken = p_chicken->getChicken();
+                    p_chicken->setChicken(chicken);
+                    if (t % NUMBER_OF_CHICKEN_PER_ROW == 0)
+                    {
+                        y_row -= DISTANCE_BETWEEN_CHICKENS;
+                        t = 0;
+                    }
+                    chicken->setComeBack(true);
+                    chicken->setHeart(CHICKEN_HEART);
+                    chicken->setStatusRight();
+                    p_chicken->setChicken(chicken);
+                    p_chicken->setRect(10 + t * DISTANCE_BETWEEN_CHICKENS, y_row);
+                    t++;
+                    for (int i = 0; i < p_chicken->getBulletList().size(); i++)
+                    {
+                        BulletSDL *p_bullet = p_chicken->getBulletList().at(i);
+                        if (p_bullet)
+                        {
+                            p_bullet->setRect(p_chicken->getRect().x + WIDTH_CHICKEN / 2 - p_bullet->getRect().w / 2, p_chicken->getRect().y + HEIGHT_CHICKEN);
+                        }
+                    }
+                }
             }
         }
 

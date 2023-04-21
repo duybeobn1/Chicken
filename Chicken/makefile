@@ -1,6 +1,6 @@
 
-main : Global.o Player.o Gift.o Explode.o Chicken.o Bullet.o Boss.o Base.o main.o 
-	g++ Global.o Player.o Gift.o Explode.o Chicken.o Bullet.o Boss.o Base.o main.o -o main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+chicken : Global.o Player.o Gift.o Explode.o Chicken.o Bullet.o Boss.o Base.o main.o 
+	g++ Global.o Player.o Gift.o Explode.o Chicken.o Bullet.o Boss.o Base.o main.o -o chicken -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 testRegression : testRegression.o Global.o Player.o Gift.o Explode.o Chicken.o Bullet.o Boss.o
 	g++ Global.o Player.o Gift.o Explode.o Chicken.o Bullet.o Boss.o testRegression.o -o testRegression
 testRegression.o : testRegression.cpp scr/core/Boss.h scr/core/Bullet.h scr/core/Chicken.h scr/core/Explode.h scr/core/Gift.h scr/core/Global.h scr/core/Player.h
